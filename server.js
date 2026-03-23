@@ -230,7 +230,12 @@ app.post("/login", (req, res) => {
         { exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24, userid: user.id, username: user.username },
         process.env.JWTSECRET
     );
-    res.cookie("SuperMarketApp", token, { httpOnly: true, secure: true, sameSite: "strict", maxAge: 1000*60*60*24 });
+    res.cookie("SuperMarketApp", token, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "strict",
+    maxAge: 1000*60*60*24
+});
     res.redirect("/");
 });
 
