@@ -214,7 +214,74 @@ h2, h3 { margin: 0; text-align: center; }
 
 footer { text-align: center; padding: 1rem;  }
 
+@media (max-width: 768px) {
 
+  /* Δεν πειράζουμε grid → απλά αφήνουμε το layout να αναπνεύσει */
+  body {
+    font-size: 1rem;
+  }
+
+  main {
+    padding: 1rem !important;
+  }
+
+  /* Header γίνεται κάθετο */
+  header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  header nav {
+    margin-left: 0;
+  }
+
+  header nav a {
+    display: block;
+    margin: 0.3rem 0;
+  }
+
+  /* Forms / containers full width */
+  form,
+  .shoppinglists {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  /* Sections stacking */
+  .list-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .buttons {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  /* Items κάθετα */
+  .product-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+  }
+
+  /* Inputs full width */
+  input,
+  select,
+  textarea,
+  button {
+    width: 100%;
+  }
+
+  /* Sidebar κάτω */
+  aside {
+    float: none;
+    width: 100%;
+    margin: 1rem 0;
+  }
+}
 </style>
 </head>
 <body>
