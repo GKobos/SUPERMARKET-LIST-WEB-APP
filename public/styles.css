@@ -173,26 +173,66 @@
                                                                                             hr{border-top:var(--border-width)solid var(--border)}
                                                                                             mark{border:var(--border-width)solid var(--border)}
                                                                                             pre,table,figure,img,svg{break-inside:avoid}pre code{white-space:pre-wrap}}
-/* MOBILE FIXES */
-@media (max-width: 900px) {
-  main {
-    flex-direction: column;
-    align-items: stretch;
-  }
+@media (max-width: 768px) {
 
-  aside {
-    width: 100%;
-  }
-}
-
-@media (max-width: 600px) {
+  /* HEADER */
   header {
     flex-direction: column;
     align-items: stretch;
     gap: 0.5rem;
+    text-align: center;
+  }
+
+  .header-center {
+    flex-direction: column;
+    width: 100%;
   }
 
   .header-center input {
     width: 100%;
+  }
+
+  .header-center button {
+    width: 100%;
+  }
+
+  .header-right {
+    justify-content: center;
+    width: 100%;
+  }
+
+  /* MAIN LAYOUT */
+  main {
+    flex-direction: column;
+    padding: 1rem;
+  }
+
+  /* ASIDES */
+  aside {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  /* LISTS */
+  .shoppinglists {
+    padding: 15px;
+  }
+
+  .list-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+
+  .buttons {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  /* PRODUCTS */
+  .product-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.3rem;
   }
 }
