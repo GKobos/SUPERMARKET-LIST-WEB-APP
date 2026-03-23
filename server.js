@@ -242,35 +242,72 @@ app.post("/login", (req, res) => {
 // --- REGISTER ---
 app.post("/register", (req, res) => {
     const errors = [];
+
     let username = (req.body.username || "").trim();
     let password = req.body.password || "";
     let confirmPassword = req.body.confirmPassword || "";
 
+    // --- VALIDATION ---
     if (!username) errors.push("You must provide a Username.");
-    if (username.length < 3 || username.length > 20) errors.push("Username length must be 3-20 chars.");
-    if (!/^[a-zA-Z0-9]+$/.test(username)) errors.push("Username must have only letters and numbers.");
+    if (username.length < 3 || username.length > 20)
+        errors.push("Username length must be 3-20 chars.");
+    if (!/^[a-zA-Z0-9]+$/.test(username))
+        errors.push("Username must have only letters and numbers.");
+
     if (!password) errors.push("You must provide a Password.");
-    if (password.length < 8 || password.length > 30) errors.push("Password length must be 8-30 chars.");
-    if (password !== confirmPassword) errors.push("Passwords do not match.");
+    if (password.length < 8 || password.length > 30)
+        errors.push("Password length must be 8-30 chars.");
+
+    if (password !== confirmPassword)
+        errors.push("Passwords do not match.");
+
+    // --- CHECK IF USER EXISTS ---
     const exists = db.prepare("SELECT * FROM users WHERE username = ?").get(username);
     if (exists) errors.push("That username already exists.");
-    if (errors.length) return res.render("homepage", { errors });
 
-    const hashed = bcrypt.hashSync(password, 10);
-    const result = db.prepare("INSERT INTO users(username, password) VALUES (?, ?)").run(username, hashed);
-    const user = db.prepare("SELECT * FROM users WHERE id = ?").get(result.lastInsertRowid);
+    // ❗ render register page, όχι homepage
+    if (errors.length) {
+        return res.render("register", { errors });
+    }
 
-    const token = jwt.sign(
-        { exp: Math.floor(Date.now() / 1000) + 60*60*24, userid: user.id, username: user.username },
-        process.env.JWTSECRET
-    );
-  res.cookie("SuperMarketApp", token, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "lax",
-    maxAge: 1000*60*60*24
-});
-    res.redirect("/");
+    try {
+        // --- HASH ---
+        const hashed = bcrypt.hashSync(password, 10);
+
+        // --- INSERT ---
+        const result = db
+            .prepare("INSERT INTO users(username, password) VALUES (?, ?)")
+            .run(username, hashed);
+
+        // --- GET USER ---
+        const user = db
+            .prepare("SELECT * FROM users WHERE id = ?")
+            .get(result.lastInsertRowid);
+
+        // --- TOKEN ---
+        const token = jwt.sign(
+            {
+                exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24,
+                userid: user.id,
+                username: user.username
+            },
+            process.env.JWTSECRET
+        );
+
+        // --- COOKIE ---
+        res.cookie("SuperMarketApp", token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: "lax",
+            maxAge: 1000 * 60 * 60 * 24
+        });
+
+        return res.redirect("/");
+
+    } catch (err) {
+        console.error("DB ERROR:", err);
+        return res.status(500).send("Database error");
+    }
 });
 
 // --- CREATE / DELETE LISTS ---
