@@ -1,0 +1,75 @@
+############################
+# Build results
+############################
+bin/
+obj/
+Debug/
+Release/
+x64/
+x86/
+build/
+[Bb]in/
+[Oo]bj/
+
+############################
+# Visual Studio files
+############################
+.vs/
+*.user
+*.suo
+*.userprefs
+*.csproj.user
+*.vbproj.user
+*.dbmdl
+*.jfm
+*.cache
+*.VC.db
+*.VC.opendb
+
+############################
+# VS Code
+############################
+.vscode/
+
+############################
+# Rider
+############################
+.idea/
+
+############################
+# NuGet
+############################
+*.nupkg
+packages/
+.nuget/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+############################
+# Logs
+############################
+*.log
+
+############################
+# OS generated files
+############################
+.DS_Store
+Thumbs.db
+
+############################
+# Test results
+############################
+TestResults/
+
+############################
+# Publish output
+############################
+publish/
+
+############################
+# Others
+############################
+*.pidb
+*.svclog
+*.dat

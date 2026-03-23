@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Send List</title>
+
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-image: linear-gradient(rgba(0,0,0,0.35), rgba(0,0,0,0.35)),
+                      url('/images/background.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* --- HEADER --- */
+  header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: #4CAF50;
+      color: white;
+      flex-wrap: wrap;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  }
+
+.header-left a {
+    color: white;
+    text-decoration: none;
+}
+
+.header-left .app-title { margin: 0.2rem 0 0 0; font-size: 2rem; font-weight: normal; }
+.header-left .subtitle { margin: 0.2rem 0 0 0; font-size: 1rem; font-weight: normal; }
+
+
+.header-right {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    margin-top: 0.2rem;
+}
+
+.nav-btn {
+    padding: 0.35rem 0.7rem;
+    border-radius: 5px;
+    border: none;
+    font-weight: bold;
+    font-size: 0.9rem;
+    cursor: pointer;
+}
+
+.logout-btn { background: #3498db; color: white; }
+.logout-btn:hover { background: #2980b9; }
+
+.delete-btn { background: #e74c3c; color: white; }
+.delete-btn:hover { background: #c0392b; }
+
+/* MAIN LAYOUT */
+main {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.90);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+    width: 100%;
+    max-width: 600px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    margin-top: 1rem;
+    font-weight: bold;
+}
+
+select {
+    width: 100%;
+    padding: 0.6rem;
+    margin-top: 0.4rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+select:focus {
+    border-color: #4CAF50;
+}
+
+button {
+    width: 100%;
+    margin-top: 2rem;
+    padding: 0.8rem;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #45a049;
+}
+
+.empty {
+    text-align: center;
+    color: #777;
+    margin-top: 1rem;
+}
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 1rem;
+}
+</style>
+
+</head>
+
+<body>
+
+<header>
+    <div class="header-left">
+        <h1 class="app-title"><a href="/">Super Market App</a></h1>
+        <% if(user){ %>
+        <p class="subtitle">Welcome <%= user.username %></p>
+        <% } %>
+    </div>
+
+    <nav class="header-right">
+        <% if(user){ %>
+        <form action="/logout" method="GET"><button class="nav-btn logout-btn">Log Out</button></form>
+        <form action="/delete-user" method="POST">
+            <button class="nav-btn delete-btn" onclick="return confirm('Are you sure you want to delete this user?')">Delete User</button>
+        </form>
+        <% } else { %>
+        <a href="/login" class="nav-btn">Log In</a>
+        <% } %>
+    </nav>
+</header>
+
+<main>
+
+<div class="container">
+
+<h2>Send List to Friend</h2>
+
+<form action="/send-list" method="POST">
+
+<label>Select List:</label>
+<select name="listId" required>
+  <% if(!lists || lists.length === 0){ %>
+    <option disabled>No lists available</option>
+  <% } else { %>
+    <% lists.forEach(list => { %>
+      <option value="<%= list.id %>"><%= list.name %></option>
+    <% }) %>
+  <% } %>
+</select>
+
+<label>Select Friend:</label>
+<select name="friendId" required>
+  <% if(!friends || friends.length === 0){ %>
+    <option disabled>No friends available</option>
+  <% } else { %>
+    <% friends.forEach(friend => { %>
+      <option value="<%= friend.id %>"><%= friend.username %></option>
+    <% }) %>
+  <% } %>
+</select>
+
+<% if(!lists || !friends || lists.length === 0 || friends.length === 0){ %>
+  <p class="empty">You need at least one list and one friend to send.</p>
+<% } else { %>
+  <button type="submit">Send List</button>
+<% } %>
+
+</form>
+
+</div>
+
+</main>
+
+<footer>
+<small>&copy; Super Market App</small>
+</footer>
+
+</body>
+</html>
