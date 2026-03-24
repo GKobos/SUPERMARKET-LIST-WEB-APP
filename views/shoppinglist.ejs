@@ -299,10 +299,10 @@
   }
 
   /* Forms / containers full width */
-  form,
-  .shoppinglists {
-    width: 100%;
-    max-width: 100%;
+  form {
+    width: 90%;
+    max-width: 360px;
+    margin: 0 auto;
   }
 
   /* Sections stacking */
@@ -333,11 +333,15 @@
   }
 
   /* Sidebar κάτω */
-  aside {
-    float: none;
+   aside {
     width: 100%;
-    margin: 1rem 0;
+    float: none;
+    margin-top: 1rem;
   }
+
+  .container {
+  flex-direction: column;
+}
 }
   </style>
   </head>

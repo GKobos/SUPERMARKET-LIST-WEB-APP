@@ -82,13 +82,23 @@ app.use(cookieParser());
 
 // --- USER AUTH MIDDLEWARE ---
 app.use((req, res, next) => {
-    res.locals.errors = [];
+    console.log("COOKIES:", req.cookies);
+
     try {
-        const decoded = jwt.verify(req.cookies.SuperMarketApp, process.env.JWTSECRET);
+        const token = req.cookies.SuperMarketApp;
+
+        if (!token) throw new Error("No token");
+
+        const decoded = jwt.verify(token, process.env.JWTSECRET);
+
+        console.log("DECODED USER:", decoded);
+
         req.user = decoded;
     } catch (err) {
+        console.log("JWT ERROR:", err.message);
         req.user = false;
     }
+
     res.locals.user = req.user;
     next();
 });
