@@ -243,8 +243,8 @@ app.post("/login", (req, res) => {
 
     res.cookie("SuperMarketApp", token, {
         httpOnly: true,
-        secure: false, // 🔥 force false για testing
-        sameSite: "lax",
+        secure: true, // 🔥 force false για testing
+        sameSite: "none",
         maxAge: 1000*60*60*24
     });
 
@@ -309,8 +309,8 @@ app.post("/register", (req, res) => {
         // --- COOKIE ---
         res.cookie("SuperMarketApp", token, {
         httpOnly: true,
-        secure: false, // 🔥 force false για testing
-        sameSite: "lax",
+        secure: true, // 🔥 force false για testing
+        sameSite: "none",
         maxAge: 1000*60*60*24
     });
 

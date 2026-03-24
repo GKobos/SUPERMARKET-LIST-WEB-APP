@@ -402,7 +402,7 @@
 
     <!-- Shopping Lists Center -->
     <section class="shoppinglists">
-      <h2>Your Shopping Lists</h2>
+      <h2 style="text-align:center;">Your Shopping Lists</h2>
       <div class="lists-container">
         <% if(lists.length === 0){ %>
           <p style="text-align:center;">You have no lists yet. Create one!</p>
@@ -441,9 +441,9 @@
             </div>
           </div>
         <% }) %>
-        <h3>Shared with you</h3>
+        <h3 style="text-align:center;">Shared with you</h3>
         <% if(!sharedLists || sharedLists.length === 0){ %>
-          <p>No shared lists</p>
+          <p style="text-align:center;">No shared lists</p>
         <% } else { %>
           <% sharedLists.forEach(function(list){ %>
             <div class="list-card">
