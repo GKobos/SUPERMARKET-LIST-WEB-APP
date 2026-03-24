@@ -212,9 +212,11 @@ footer {
 
 <main>
 <form action="/register" method="POST">
-    <% errors.forEach(error => { %>
-        <p class="notice"><%= error %></p>
-    <% }) %>
+    <% if (typeof errors !== 'undefined' && errors.length) { %>
+      <% errors.forEach(error => { %>
+          <p class="notice"><%= error %></p>
+      <% }) %>
+    <% } %>
     <fieldset>
         <legend>Create an Account</legend>
 

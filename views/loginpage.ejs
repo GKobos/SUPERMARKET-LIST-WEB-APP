@@ -188,9 +188,11 @@ footer {
 
 <main>
 <form action="/login" method="POST">
-    <% errors.forEach(error => { %>
-        <p class="notice"><%= error %></p>
-    <% }) %>
+    <% if (typeof errors !== 'undefined' && errors.length) { %>
+      <% errors.forEach(error => { %>
+          <p class="notice"><%= error %></p>
+      <% }) %>
+    <% } %>
     <fieldset>
         <legend>Log In</legend>
 
