@@ -286,7 +286,7 @@ app.post("/register", (req, res) => {
         httpOnly: true,
         sameSite: "lax"
     });
-
+    
     return res.redirect("/");
 });
 
