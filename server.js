@@ -242,11 +242,11 @@ app.post("/login", (req, res) => {
     );
 
     res.cookie("SuperMarketApp", token, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-    maxAge: 1000 * 60 * 60 * 24
-});
+        httpOnly: true,
+        secure: true,
+        sameSite: "lax",   // 🔥 αλλαγή εδώ
+        maxAge: 1000 * 60 * 60 * 24
+    });
 
     res.redirect("/");
 });
@@ -308,10 +308,10 @@ app.post("/register", (req, res) => {
 
         // --- COOKIE ---
         res.cookie("SuperMarketApp", token, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
-    maxAge: 1000 * 60 * 60 * 24
+  httpOnly: true,
+  secure: true,
+  sameSite: "lax",   // 🔥 αλλαγή εδώ
+  maxAge: 1000 * 60 * 60 * 24
 });
 
         return res.redirect("/");
