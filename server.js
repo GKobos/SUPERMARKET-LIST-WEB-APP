@@ -230,12 +230,14 @@ app.post("/login", (req, res) => {
         { exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24, userid: user.id, username: user.username },
         process.env.JWTSECRET
     );
+
     res.cookie("SuperMarketApp", token, {
-    httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
-    sameSite: "lax",
-    maxAge: 1000*60*60*24
-});
+        httpOnly: true,
+        secure: false, // 🔥 force false για testing
+        sameSite: "lax",
+        maxAge: 1000*60*60*24
+    });
+
     res.redirect("/");
 });
 
@@ -296,11 +298,11 @@ app.post("/register", (req, res) => {
 
         // --- COOKIE ---
         res.cookie("SuperMarketApp", token, {
-            httpOnly: true,
-            secure: process.env.NODE_ENV === "production",
-            sameSite: "lax",
-            maxAge: 1000 * 60 * 60 * 24
-        });
+        httpOnly: true,
+        secure: false, // 🔥 force false για testing
+        sameSite: "lax",
+        maxAge: 1000*60*60*24
+    });
 
         return res.redirect("/");
 
@@ -401,12 +403,12 @@ app.post("/add-product", (req, res) => {
         )
     `).get(listId, req.user.userid, req.user.userid);
 
+    if (!list) return res.status(403).send("No access");
+
     db.prepare(`
         INSERT INTO products(name, price, quantity, targetQuantity, listId)
         VALUES (?, ?, ?, ?, ?)
     `).run(name, price, quantity, targetQuantity, listId);
-
-    if (!list) return res.status(403).send("No access");
 
     // Αν η φόρμα θέλει redirect
     res.redirect("/list/" + listId);
