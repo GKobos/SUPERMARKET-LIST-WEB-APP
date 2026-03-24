@@ -278,19 +278,26 @@
     align-items: center;
   }
 
+  .header-center {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+}
+
   .shoppinglists {
     order: 1;
-    width: 100%;
+    width: 80%;
   }
 
   aside:first-of-type {
     order: 2;
-    width: 100%;
+    width: 80%;
   }
 
   aside:last-of-type {
     order: 3;
-    width: 100%;
+    width: 80%;
   }
 
 }
@@ -301,7 +308,7 @@
 
   <header>
     <div class="header-left">
-      <h1 class="app-title"><a href="/">Super Market App</a></h1>
+      <h1 class="app-title"><a href="/">Super Market List App</a></h1>
       <% if(user){ %>
         <p class="subtitle">Welcome <%= user.username %></p>
       <% } %>
@@ -330,7 +337,7 @@
     <aside>
       <h3>Friend Requests</h3>
       <% if(friendRequests.length===0){ %>
-        <p>No requests</p>
+        <p>No requests yet!</p>
       <% } else { %>
         <ul style="list-style:none; padding:0;">
           <% friendRequests.forEach(fr => { %>
@@ -373,7 +380,7 @@
             </div>
             <div class="list-products">
               <% if(list.products.length === 0){ %>
-                <p>No products yet.</p>
+                <p>No products yet!</p>
               <% } else { %>
                 <% list.products.forEach(function(product){ %>
                   <div class="product-item">
@@ -393,9 +400,9 @@
             </div>
           </div>
         <% }) %>
-        <h3 style="text-align:center;">Shared with you</h3>
+        <h2 style="text-align:center;">Shared Lists With You</h2>
         <% if(!sharedLists || sharedLists.length === 0){ %>
-          <p style="text-align:center;">No shared lists</p>
+          <p style="text-align:center;">No shared lists yet!</p>
         <% } else { %>
           <% sharedLists.forEach(function(list){ %>
             <div class="list-card">
@@ -410,7 +417,7 @@
 
               <div class="list-products">
                 <% if(list.products.length === 0){ %>
-                  <p>No products yet.</p>
+                  <p>No products yet!</p>
                 <% } else { %>
                   <% list.products.forEach(function(product){ %>
                     <div class="product-item">
@@ -441,7 +448,7 @@
     <aside>
       <h3>Your Friends</h3>
       <% if(friends.length===0){ %>
-        <p>No friends yet</p>
+        <p>No friends yet!</p>
       <% } else { %>
         <ul style="list-style:none; padding:0;">
           <% friends.forEach(f => { %>
@@ -453,7 +460,7 @@
   </main>
 
   <footer>
-  <small>&copy; Super Market App</small>
+  <small>&copy; Super Market List App</small>
   </footer>
 
   <script>

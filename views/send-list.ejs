@@ -128,74 +128,33 @@ footer {
     text-align: center;
     padding: 1rem;
 }
-
 @media (max-width: 768px) {
 
-  /* Δεν πειράζουμε grid → απλά αφήνουμε το layout να αναπνεύσει */
-  body {
+  main {
+    padding: 1rem;
+    max-width: 80%;
+    margin: 0 auto;
+  }
+
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .nav-btn {
+    margin-top: 0.5rem;
+    width: 100%;
+  }
+
+  .container {
+    margin: 1rem;
+    padding: 1rem;
+  }
+
+  h2 {
     font-size: 1rem;
   }
 
-  main {
-    padding: 1rem !important;
-  }
-
-  /* Header γίνεται κάθετο */
-  header {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
-
-  header nav {
-    margin-left: 0;
-  }
-
-  header nav a {
-    display: block;
-    margin: 0.3rem 0;
-  }
-
-  /* Forms / containers full width */
-  form,
-  .shoppinglists {
-    width: 100%;
-    max-width: 100%;
-  }
-
-  /* Sections stacking */
-  .list-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-  }
-
-  .buttons {
-    flex-direction: column;
-    width: 100%;
-  }
-
-  /* Items κάθετα */
-  .product-item {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.4rem;
-  }
-
-  /* Inputs full width */
-  input,
-  select,
-  textarea,
-  button {
-    width: 100%;
-  }
-
-  /* Sidebar κάτω */
-  aside {
-    float: none;
-    width: 100%;
-    margin: 1rem 0;
-  }
 }
 </style>
 
@@ -205,7 +164,7 @@ footer {
 
 <header>
     <div class="header-left">
-        <h1 class="app-title"><a href="/">Super Market App</a></h1>
+        <h1 class="app-title"><a href="/">Super Market List App</a></h1>
         <% if(user){ %>
         <p class="subtitle">Welcome <%= user.username %></p>
         <% } %>
@@ -266,7 +225,7 @@ footer {
 </main>
 
 <footer>
-<small>&copy; Super Market App</small>
+<small>&copy; Super Market List App</small>
 </footer>
 
 </body>

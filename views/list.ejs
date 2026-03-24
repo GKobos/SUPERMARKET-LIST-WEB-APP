@@ -215,72 +215,40 @@ h2, h3 { margin: 0; text-align: center; }
 footer { text-align: center; padding: 1rem;  }
 
 @media (max-width: 768px) {
-
-  /* Δεν πειράζουμε grid → απλά αφήνουμε το layout να αναπνεύσει */
-  body {
-    font-size: 1rem;
-  }
-
   main {
-    padding: 1rem !important;
+    padding: 1rem;
+    max-width: 80%;
+    margin: 0 auto;
   }
 
-  /* Header γίνεται κάθετο */
-  header {
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-  }
+  .header-center {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  position: relative;
+}
 
-  header nav {
-    margin-left: 0;
-  }
-
-  header nav a {
-    display: block;
-    margin: 0.3rem 0;
-  }
-
-  /* Forms / containers full width */
-  form,
-  .shoppinglists {
-    width: 100%;
-    max-width: 100%;
-  }
-
-  /* Sections stacking */
-  .list-header {
-    flex-direction: column;
-    align-items: flex-start;
+  nav {
+    display: flex;
     gap: 0.5rem;
+    margin-top: 0.5rem;
   }
 
-  .buttons {
-    flex-direction: column;
-    width: 100%;
+  .add-product-form{
+    width: 90%;
   }
 
-  /* Items κάθετα */
-  .product-item {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.4rem;
+  .main-card{
+    align-items: center;
   }
 
-  /* Inputs full width */
+  /* Inputs full width (όχι buttons) */
   input,
   select,
-  textarea,
-  button {
+  textarea {
     width: 100%;
   }
 
-  /* Sidebar κάτω */
-  aside {
-    float: none;
-    width: 100%;
-    margin: 1rem 0;
-  }
 }
 </style>
 </head>
@@ -289,7 +257,7 @@ footer { text-align: center; padding: 1rem;  }
 <header>
   <div class="header-left">
     <h1 class="app-title">
-        <a href="/">Super Market App</a>
+        <a href="/">Super Market List App</a>
     </h1>
     <% if(user){ %>
       <p class="subtitle">Welcome <%= user.username %></p>
@@ -356,7 +324,7 @@ footer { text-align: center; padding: 1rem;  }
 </main>
 
 <footer>
-<small>&copy; Super Market App</small>
+<small>&copy; Super Market List App</small>
 </footer>
 
 <script>
