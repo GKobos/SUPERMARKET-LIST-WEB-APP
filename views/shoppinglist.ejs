@@ -273,77 +273,28 @@
 
 @media (max-width: 768px) {
 
-  /* Δεν πειράζουμε grid → απλά αφήνουμε το layout να αναπνεύσει */
-  body {
-    font-size: 1rem;
-    margin: 8px;
-  }
-
   main {
-    padding: 1rem !important;
-  }
-
-  /* Header γίνεται κάθετο */
-  header {
     flex-direction: column;
     align-items: center;
-    text-align: center;
   }
 
-  header nav {
-    margin-left: 0;
-  }
-
-  header nav a {
-    display: block;
-    margin: 0.3rem 0;
-  }
-
-  /* Forms / containers full width */
-  form {
-    width: 90%;
-    max-width: 360px;
-    margin: 0 auto;
-  }
-
-  /* Sections stacking */
-  .list-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.5rem;
-  }
-
-  .buttons {
-    flex-direction: column;
+  .shoppinglists {
+    order: 1;
     width: 100%;
   }
 
-  /* Items κάθετα */
-  .product-item {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 0.4rem;
-  }
-
-  /* Inputs full width */
-  input,
-  select,
-  textarea,
-  button {
+  aside:first-of-type {
+    order: 2;
     width: 100%;
   }
 
-  /* Sidebar κάτω */
-   aside {
+  aside:last-of-type {
+    order: 3;
     width: 100%;
-    float: none;
-    margin-top: 1rem;
   }
 
-  .container {
-  flex-direction: column;
 }
-}
+
   </style>
   </head>
   <body>
