@@ -243,7 +243,7 @@ app.post("/login", (req, res) => {
 
     res.cookie("SuperMarketApp", token, {
         httpOnly: true,
-        secure: true,
+        secure: process.env.NODE_ENV === "production", // μόνο σε production true
         sameSite: "lax",   // 🔥 αλλαγή εδώ
         maxAge: 1000 * 60 * 60 * 24
     });
@@ -309,7 +309,7 @@ app.post("/register", (req, res) => {
         // --- COOKIE ---
         res.cookie("SuperMarketApp", token, {
   httpOnly: true,
-  secure: true,
+  secure: process.env.NODE_ENV === "production", // μόνο σε production true
   sameSite: "lax",   // 🔥 αλλαγή εδώ
   maxAge: 1000 * 60 * 60 * 24
 });
