@@ -107,7 +107,7 @@ app.use((req, res, next) => {
 
 // Homepage / Shopping list main page
 app.get("/", (req, res) => {
-    if (!req.user) return res.render("homepage");
+    if (!req.user) return res.render("homepage", { errors: [] });
 
     const lists = db.prepare("SELECT * FROM lists WHERE userId = ?").all(req.user.userid);
     const listsWithProducts = lists.map(list => {
@@ -242,11 +242,11 @@ app.post("/login", (req, res) => {
     );
 
     res.cookie("SuperMarketApp", token, {
-        httpOnly: true,
-        secure: true, // 🔥 force false για testing
-        sameSite: "none",
-        maxAge: 1000*60*60*24
-    });
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+    maxAge: 1000 * 60 * 60 * 24
+});
 
     res.redirect("/");
 });
@@ -308,11 +308,11 @@ app.post("/register", (req, res) => {
 
         // --- COOKIE ---
         res.cookie("SuperMarketApp", token, {
-        httpOnly: true,
-        secure: true, // 🔥 force false για testing
-        sameSite: "none",
-        maxAge: 1000*60*60*24
-    });
+    httpOnly: true,
+    secure: true,
+    sameSite: "none",
+    maxAge: 1000 * 60 * 60 * 24
+});
 
         return res.redirect("/");
 
